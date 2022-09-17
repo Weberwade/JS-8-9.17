@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        class Person{
+            name = '孙悟空'
+            age = 18
+
+            sayHello(){
+                console.log('Hello,我是',this.name);
+            }
+        }
+        class Dog extends Person{
+            name='旺财'
+        }
+
+        const p = new Person()
+        const d = new Dog()
+
+        let o = {}
+        console.log(p);
+        console.log(o.__proto__);
+
+        console.log(Object.getPrototypeOf(p) === Object.getPrototypeOf(d));
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

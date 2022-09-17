@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let g = 0
+        let s = 0
+        let b = 0
+        let t = 0
+        // for(let i = 100 ; i < 1000 ; i++){
+        //     // 获取百位数
+        //     g = parseInt(i / 100) 
+        //     // 获取十位数
+        //     s = parseInt((i - g * 100) / 10) 
+        //     // 获取个位数
+        //     b = i % 10 
+
+        //     g = g ** 3
+        //     s = s ** 3
+        //     b = b ** 3  
+        //     if ((g + s + b) === i){
+        //         console.log(`${i}这是一个水仙花数`);
+        //         t++
+        //     }
+
+        // }
+        
+        
+        
+        for(let i = 100 ; i < 1000 ; i++){
+            let str = i + ''
+            // 获取百位数
+            g = str[0]
+            // 获取十位数
+            s = str[1]
+            // 获取个位数
+            b = str[2]
+
+            g = g ** 3
+            s = s ** 3
+            b = b ** 3  
+            if ((g + s + b) === i){
+                console.log(`${i}这是一个水仙花数`);
+                t++
+            }
+        }
+
+        console.log(`1000以内一共有${t}个水仙花数`);
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

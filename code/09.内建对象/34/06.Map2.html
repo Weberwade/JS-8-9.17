@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        const map = new Map()
+        map.set('name','孙悟空')
+        map.set('age',18)
+        let arr = [...map]
+        console.log(map);//[['name','孙悟空'],['age',18]]
+        const map2 = new Map([['name','孙悟空'],['age',18]])
+
+        for (let entry of map){
+            let [key , value] = entry
+            console.log(key,value);
+        }
+
+        map.forEach((key,value,c) => {
+            console.log(key,value);
+        })
+
+        console.log(map.values());
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

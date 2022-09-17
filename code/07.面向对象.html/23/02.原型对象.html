@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        class Person {
+            name = '孙悟空'
+
+            sayHello = function () {
+                console.log('我是对象自身中');
+            }
+            sayHello() {
+                console.log('我在原型链中' + this.name);
+            }
+        }
+
+        const p = new Person()
+
+        console.log(Object.getPrototypeOf(p));
+
+        const obj = {}
+
+        console.log(obj.__proto__.__proto__);
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

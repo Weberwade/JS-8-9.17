@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+let result = true && true //true
+result = true && false // false
+result = false && false //false
+
+false && alert(123)//第一个值是true，alert会执行
+false && alert(123)//第一个值是false，alert不会执行
+
+result = 1 && 2 // 2
+result = 1 && 0 // 0
+result = 0 && NaN // 0 
+
+result = true || false //true
+result = true || true //true
+result = false || false // false
+
+result = false || alert('123') //第一个值为false，会返回alert
+result = true || alert('123') //第一个值为true，不会返回alert
+
+console.log(result);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

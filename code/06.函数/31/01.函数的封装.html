@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // const arr = [9, 1, 3, 2, 8, 0, 5, 7, 6, 4]
+        // const arr2 = [9, 8, 5, 1, 3, 0, 2, 7, 6, 4]
+
+        // // 设置一个数组排序函数
+        // function arrSort(arr) {
+        //     let arrFlag = arr.slice()
+        //     for (let i = 0; i < arrFlag.length; i++) {
+        //         for (let j = i + 1; j < arrFlag.length; j++) {
+        //             if (arrFlag[i] > arrFlag[j]) {
+        //                 let temp = arrFlag[i]
+        //                 arrFlag[i] = arrFlag[j]
+        //                 arrFlag[j] = temp
+        //             }
+        //         }
+        //     }
+        //     // 排序完成将排完序的数组作为返回值返回
+        //     return arrFlag
+        // }
+
+        // console.log(arr2);
+        // console.log(arr);
+        // console.log(arrSort(arr));
+        // console.log(arrSort(arr2));
+
+
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+        }
+
+        const personArr = [
+            new Person('孙悟空', 18),
+            new Person('沙和尚', 38),
+            new Person('猪八戒', 9),
+            new Person('红孩儿', 8),
+        ]
+
+        // 过滤出符合条件的对象
+        function inspectAgeMid18(personArr , cb){
+            let newArrey = []
+            for (let i = 0; i < personArr.length; i++) {
+                if (cb(personArr[i])) {
+                    newArrey.push(personArr[i])
+                }
+            }
+            return newArrey
+        }
+        console.log(inspectAgeMid18(personArr , a => a.age < 18 ));
+        console.log(inspectAgeMid18(personArr , a => a.age >= 18 ));
+
+        const arr = [1,2,3,4,5,6,7,8,9,10]
+        let result = inspectAgeMid18(arr , a => a % 2 === 0)
+        console.log(result);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

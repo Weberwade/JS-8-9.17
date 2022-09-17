@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let a = '全局a'
+
+        function fn() {
+            console.log(a)
+        }
+
+
+        function fn2() {
+            let a = 'fun2的a'
+            fn()
+        }
+        
+        function fn3() {
+            let a = 'fun3的a'
+            function fn4(){
+                console.log(a);
+            }
+            fn4()
+        }
+
+        fn3()
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

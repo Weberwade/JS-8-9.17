@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let str = 'dajsoj13715678903kajshdjika13457890657kasjhdjkahs13811678908sdsadsd'
+        let re = /(1[3-9]\d)[\d]{4}(\d{4})/g
+        let result = re.exec(str)
+        while(result){
+            console.log(result[1]+'****'+result[2]);
+            result = re.exec(str)
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

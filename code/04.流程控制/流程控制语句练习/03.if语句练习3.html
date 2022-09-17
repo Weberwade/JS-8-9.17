@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let h = +prompt('请输入你的身高')
+        let m = +prompt('请输入你的财富(w)')
+        let f = +prompt('请输入你的颜值')
+
+        let n = h + m + f
+
+        if (isNaN(n)) {
+            console.log('请输入正常信息')
+        } else {
+
+            if (h > 180 && m > 1000 && f > 500) {
+                console.log('嫁嫁嫁！！！！');
+            } else if (h > 180 || m > 1000 || f > 500) {
+                console.log('嫁吧，也行')
+            } else {
+                console.log('滚');
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

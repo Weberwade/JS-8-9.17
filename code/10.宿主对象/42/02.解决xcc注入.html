@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 350px;
+            text-align: center;
+            margin: 100px auto;
+        }
+
+        .outer>table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .outer th,
+        .outer td {
+            border: 1px solid black;
+            height: 35px;
+
+        }
+
+        form>div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <table>
+            <tbody id="tbodyAdd">
+                <tr>
+                    <th>姓名</th>
+                    <th>邮件</th>
+                    <th>薪资</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>孙悟空</td>
+                    <td>swk@hgs.com</td>
+                    <td>10000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+                <tr>
+                    <td>猪八戒</td>
+                    <td>zbj@hgs.com</td>
+                    <td>12000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+                <tr>
+                    <td>沙和尚</td>
+                    <td>shs@hgs.com</td>
+                    <td>9000</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="#">
+            <div>
+                <label for="name">姓名</label>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="email">邮件</label>
+                <input type="text" id="email">
+            </div>
+            <div>
+                <label for="salary">薪资</label>
+                <input type="text" id="salary">
+            </div>
+            <button id="btn" type="button">添加</button>
+        </form>
+
+
+        <script>
+            // // 判断是否删除函数
+            // function removeEle() {
+            //     const tr = this.parentNode.parentNode
+            //     const tName = tr.firstElementChild.textContent
+            //     const isRemove = confirm(`确定要删除${tName}的信息吗？`)
+            //     if (isRemove) {
+            //         tr.remove()
+            //     }
+            // }
+
+
+            // 为删除按钮绑定效果
+            const remove = document.getElementsByTagName('a')
+
+            document.onclick = function(event){
+                if([...remove].includes(event.target)){
+                    const tr = event.target.parentNode.parentNode
+                    const tName = tr.firstElementChild.textContent
+                    const isRemove = confirm(`确定要删除${tName}的信息吗？`)
+                    if (isRemove) {
+                        tr.remove()
+                    }
+                }
+            }
+
+            // for (let i of remove) {
+            //     i.addEventListener('click', removeEle)
+            // }
+
+            // 点击按钮将用户信息插入到表格中
+            const btn = document.getElementById('btn')
+            btn.onclick = function () {
+                //获取用户输入的数据
+                const inName = document.getElementById('name').value
+                const email = document.getElementById('email').value
+                const salary = document.getElementById('salary').value
+                //获取添加位置
+                const tbodyAdd = document.getElementById('tbodyAdd')
+                // 这种写法容易被xss攻击！
+                // tbodyAdd.insertAdjacentHTML("beforeend",
+                //     `<tr>
+                //     <td>${inName}</td>
+                //     <td>${email}</td>
+                //     <td>${salary}</td>
+                //     <td><a href="javascript:;">删除</a></td>
+                // </tr>`)
+                
+                // 创建元素
+                // 创建 tr
+                const newTr = document.createElement('tr')
+                // 创建td
+                const nameTd = document.createElement('td')
+                const emailTd = document.createElement('td')
+                const salaryTd = document.createElement('td')
+                // 添加文本
+                nameTd.innerText = inName
+                emailTd.innerText = email
+                salaryTd.innerText = salary
+                // 将所有td放入tr
+                newTr.appendChild(nameTd) 
+                newTr.appendChild(emailTd) 
+                newTr.appendChild(salaryTd) 
+                newTr.insertAdjacentHTML("beforeend",'<td><a href="javascript:;">删除</a></td>')
+
+                // 将添加到tbody
+                tbodyAdd.appendChild(newTr)
+
+                
+                /* 由于超链接是新添加的，绑定单击响应函数的代码已经执行过了，
+                   所以并没有绑定，要在我们按钮单击执行时，再次绑定即可
+                */
+                // remove[remove.length-1].addEventListener('click', removeEle)
+            
+            }
+
+
+
+
+        </script>
+    </div>
+</body>
+
+</html>

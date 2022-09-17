@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        class Person{}
+
+        const p1 = new Person()
+        p1.name = '王老六'
+        const p2 = new Person()
+        p2.name = '王老七'
+
+
+        console.log(p1 instanceof Person);
+        console.log(p2);
+
+        const five = {
+            name:'王老五',
+            age:20,
+            height:166,
+            width:50,
+            sleep(){
+                console.log(this.name , '睡觉啦！');
+            },
+            eat(){
+                console.log(this.name , '吃饭啦！');
+            }
+        }
+
+        const yello = {
+            name:'大黄',
+            age:5,
+            sleep(){
+                console.log(this.name , '睡觉啦！');
+            },
+            eat(){
+                console.log(this.name , '吃饭啦！');
+            }
+        }
+
+        console.log(five instanceof Object);
+        console.log(yello);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

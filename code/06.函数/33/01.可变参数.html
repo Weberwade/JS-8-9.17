@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        // function fn(){
+        //     console.log(arguments[0]);
+        //     console.log(Array.isArray(arguments));
+        // }
+
+        // fn(11,10)
+
+
+        function sum(){
+            // 通过arguments，可以不受参数数量的限制更灵活的创建函数
+            let flag = 0
+            for(let i = 0;i < arguments.length;i++){
+                flag += arguments[i]
+            }
+            return flag
+        }
+        
+        let result = sum(1,5,9,66)
+        
+        function sum2(...num){
+            return num.reduce((a,b) => a + b,0)
+        }
+
+        function fn1(a,b,...c){
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+        fn1(1,2,3)
+        result = sum2(9,10)
+        console.log(result);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
