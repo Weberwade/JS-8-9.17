@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+
+            // 点击按钮读取css样式
+            const btn1 = document.getElementById('btn1')
+            const box1 = document.querySelector('.box1')
+
+            btn1.addEventListener('click', function () {
+                const stylebox1 = getComputedStyle(box1)
+                box1.style.width = parseInt(stylebox1.width) + 100 + 'px'
+                const width = stylebox1.width
+                console.log(width);
+            })
+        }
+    </script>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+
+        .box1::before {
+            content: 'hello';
+            color: red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <button id="btn1">点我一下 </button>
+    <hr>
+    <div class="box1"></div>
+</body>
+
+</html>
