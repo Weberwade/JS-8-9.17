@@ -819,6 +819,46 @@
   + 2表示目标阶段
   + 3表示冒泡阶段
 
+## 5.7 绑定按键事件
+
++ 键盘按键事件只能绑定给可以获取焦点的元素或者是document
+  + 所以键盘按键事件一般通过document来进行事件
++ 键盘按键事件分两种`keydown`和`keyup`
+  + 按键按下事件和按键松开事件
+
+### 5.7.1 取消误操作卡顿
+
++ 网页防止误操作，按下不松开连续的输出时第一次和第二次有一个明显的间隔
+  + 这样会导致一些需要流程移动的事件会出现不好的用户体验
+
+### 5.7.2 `event.key`获取详细按键
+
++ 通过`event.key`获取详细按键位置
+
+``````````````javascript
+      document.addEventListener("keydown", function (event) {
+            // 根据按键更改蛇移动的方向
+            switch (event.key) {
+                case 'ArrowUp':
+                    // 向上移动蛇
+                    snakeHead.style.top = snakeHead.offsetTop - 10 +'px'
+                    break
+                case 'ArrowDown':
+                    // 向下移动蛇
+                    snakeHead.style.top = snakeHead.offsetTop + 10 +'px'
+                    break
+                case 'ArrowLeft':
+                    // 向左移动蛇
+                    snakeHead.style.left = snakeHead.offsetLeft - 10 +'px'
+                    break
+                case 'ArrowRight':
+                    // 向右移动蛇
+                    snakeHead.style.left = snakeHead.offsetLeft + 10 +'px'
+                    break
+            }
+        })
+``````````````
+
 # 6.事件对象
 
 ## 6.1 事件对象简介
@@ -1092,3 +1132,11 @@
 + 获取或设置元素滚动条的左偏移量
 + 可读
 
+# 8.事件循环（event loop）
+
++ 函数在每次执行时，都会产生一个执行环境
+  + 执行环境负责存储函数执行时产生的一切数据
++ 问题：函数的执行环境要存储到哪里呢？
+  + 函数的执行环境存储到了一个叫做调用栈的地方
++ **关于函数的调用栈以及执行环境问题，详见06.函数1.15**
++ 事件循环事件详见调用栈概念，**说白话就是JS是单线程的，每一次调用栈只会执行一个执行环境，其他要执行的函数会先在消息列表中排队，直到上一个执行环境从调用栈弹出**
