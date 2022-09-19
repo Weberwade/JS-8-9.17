@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 640px;
+            height: 390px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* .img-list{
+        } */
+
+        .img-list li {
+            list-style: none;
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transition: all 0.9s;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        li.current {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .pevr-next a {
+            font-size: 60px;
+            z-index: 2;
+            height: 60px;
+            color: #fff;
+            text-decoration: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            opacity: 0.5;
+        }
+
+        .pevr-next a:hover {
+            opacity: 1;
+        }
+
+        #next {
+            right: 0;
+        }
+
+        .all-a {
+            position: absolute;
+            width: 95px;
+            z-index: 2;
+            bottom: 30px;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+        }
+
+        .all-a>a {
+            display: block;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 8px;
+            height: 8px;
+            float: left;
+            margin-right: 5px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .all-a>a:hover,
+        .all-a .active {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <!-- 所有的图片 -->
+        <ul class="img-list">
+            <li class="current">
+                <a href="#">
+                    <img src="./img/1.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="./img/2.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="./img/3.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="./img/4.png">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="./img/5.png">
+                </a>
+            </li>
+        </ul>
+
+        <!-- 切换图片按钮 -->
+        <div class="pevr-next">
+            <a id="pevr" href="javascript:;"><</a>
+            <a id="next" href="javascript:;">></a>
+        </div>
+
+        <!-- 图片导航点 -->
+        <div class="all-a">
+            <a class="active" href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+
+
+
+    <script>
+        function goFlag(flag, arrName) {
+            // 获取当前显示图片
+            const current = document.querySelector('.img-list > .current')
+            // 获取下一个显示的图片
+            let next
+            if (flag === 'next') {
+                next = current.nextElementSibling || document.querySelector('.img-list').firstElementChild
+            } else if (flag === 'prev') {
+                next = current.previousElementSibling || document.querySelector('.img-list').lastElementChild
+            } else if (flag === 'nav') {
+                const currentA = arrName.indexOf(event.target)
+                next = document.querySelectorAll('.img-list > li')[currentA]
+            } else if (flag === 'active') {
+                // 获取所有图片li
+                const allLi = document.querySelectorAll('.img-list > li')
+                // 将类数组转换为数组
+                const allLiArr = [...allLi]
+                // 获取高亮导航点
+                const active = document.querySelector('.all-a > .active')
+                // 遍历图片数组
+                for (let i of allLiArr) {
+                    // 找到显示图片
+                    if (i.classList.value === 'current') {
+                        // 获取显示图片的索引
+                        const dot = allLiArr.indexOf(i)
+                        // 获取应该高亮的导航点
+                        const currentA = document.querySelectorAll('.all-a > a')[dot]
+                        // 删除原高亮导航点
+                        active.classList.remove('active')
+                        // 将对应索引的高亮导航点高亮
+                        currentA.classList.add('active')
+                    }
+                }
+            }
+            //为有next的内容切换显示状态
+            if (next) {
+                current.classList.remove('current')
+                next.classList.add('current')
+            }
+        }
+
+        /*
+
+            设置开关自动切换图片函数
+
+        */
+        function toggleChange() {
+            let timer = null
+
+            return () => {
+                if (timer === null) {
+                    timer = setTimeout(function fn() {
+                        goFlag('next')
+                        goFlag('active')
+                        timer = setTimeout(fn, 3000)
+                    }, 3000)
+                } else {
+                    clearTimeout(timer)
+                    timer = null
+                }
+            }
+        }
+        let changeAuto = toggleChange()
+        changeAuto()
+
+        // 鼠标移入关闭自动切换
+        const outer = document.getElementsByClassName('outer')[0]
+        outer.addEventListener("mouseenter", function () {
+            changeAuto()
+        })
+
+        //鼠标移出开启循环
+        outer.addEventListener("mouseleave", function () {
+            changeAuto()
+        })
+
+        // 图片上一张切换
+        const pevr = document.getElementById('pevr')
+        pevr.addEventListener("click", function () {
+            goFlag('prev')
+            goFlag('active')
+        })
+
+        // 图片切换下一张
+        const next = document.getElementById('next')
+        next.addEventListener("click", function () {
+            goFlag('next')
+            goFlag('active')
+        })
+
+        // 所有圆点，绑定点击事件
+        const allA = document.querySelectorAll('.all-a > a')
+        document.addEventListener("click", function (event) {
+            allAArr = [...allA]
+            if (allAArr.includes(event.target)) {
+                goFlag('nav', allAArr)
+                goFlag('active')
+            }
+        })
+
+    </script>
+</body>
+
+</html>

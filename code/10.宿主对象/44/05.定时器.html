@@ -7,16 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="btn1">点我</button>
-    
     <script>
 
-        const btn1 = document.getElementById('btn1')
+        // const timer = setTimeout(function(){
+        //     console.log(1);
+        // },3)
+        // clearTimeout(timer)
 
-        btn1.addEventListener("click",function(){
-            // location = 'https:/www.baidu.com'
-            console.log(location.reload());
-        })
+            const timer = setInterval(function(){
+                console.log(1);
+            },3000)
+            clearInterval(timer)
+
 
     </script>
 </body>

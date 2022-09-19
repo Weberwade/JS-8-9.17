@@ -24,6 +24,8 @@
         </div>
         <div class="btn-wepper">
             <button class="up">上一张</button>
+            <button class="auto">自动</button>
+            <button class="clearAuto">关闭自动</button>
             <button class="down">下一张</button>
         </div>
     </div>
@@ -37,6 +39,8 @@
         const btnUp = document.getElementsByClassName('up')[0]
         const btnDown = document.getElementsByClassName('down')[0]
         const info = document.getElementById('info')
+        const auto = document.getElementsByClassName('auto')[0]
+        const clearAuto = document.getElementsByClassName('clearAuto')[0]
         // 创建一个数组存储图片的路径
         const imgArr = [
             "./img/1.png",
@@ -46,27 +50,49 @@
             "./img/5.png"
         ]
         let flag = 0
-        info.innerText = `总共${imgArr.length}张图片，当前是第${flag+1}张`
-        //切换下一张图片
-        btnDown.addEventListener('click', function () {
+        function pQieHuan(){
             flag++
             // 检查flag值是否合法 超过最大索引循环到第一张
             if (flag > imgArr.length - 1) {
                 flag = 0
             }
             img.src = imgArr[flag]
-            info.innerText = `总共${imgArr.length}张图片，当前是第${flag+1}张`
+            info.innerText = `总共${imgArr.length}张图片，当前是第${flag + 1}张`
+        }
+
+        info.innerText = `总共${imgArr.length}张图片，当前是第${flag + 1}张`
+        // 开启一个定时切换图片的定时器
+        let timer 
+        auto.addEventListener("click", function () {
+            clearTimeout(timer)
+            timer = setTimeout(function fn() {
+                pQieHuan()
+                timer = setTimeout(fn, 2000)
+            }, 2000)      
+        })
+
+        // 关闭图片自动切换
+        clearAuto.addEventListener('click',function(){
+            clearTimeout(timer)
+            console.log(timer);
+        })
+
+        //切换下一张图片
+        btnDown.addEventListener('click', function () {
+            clearTimeout(timer)
+            pQieHuan()
         })
 
         // 切换上一张图片
         btnUp.addEventListener('click', function () {
+            clearTimeout(timer)
             flag--
             // 检查flag值是否合法 小于最小索引循环到最后一张
             if (flag < 0) {
                 flag = imgArr.length - 1
             }
             img.src = imgArr[flag]
-            info.innerText = `总共${imgArr.length}张图片，当前是第${flag+1}张`
+            info.innerText = `总共${imgArr.length}张图片，当前是第${flag + 1}张`
         })
 
     </script>
